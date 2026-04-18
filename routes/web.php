@@ -1,14 +1,15 @@
 <?php
 
 use App\Models\Store;
-use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
 use App\Services\EmployeeService;
+use App\Services\StoreService;
 
 Route::get('/', function () {
-    $stores = Store::all();
+    $storeService = app(StoreService::class);
+    $stores = $storeService->getAllStores();
     return view('home', ['stores' => $stores]);
 })->name('stores.index');
 
