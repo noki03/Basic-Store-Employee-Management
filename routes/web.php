@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/emp', function () {
     $stores = Store::all();
-    $employees = Employee::all();
+    $employees = Employee::with('store')->get();
 
     return view('empManagement', [
         'stores' => $stores,

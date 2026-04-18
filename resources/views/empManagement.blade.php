@@ -120,7 +120,7 @@
                             <td>{{ $employee['employee_position'] }}</td>
                             <td>{{ $employee['employee_Email'] }}</td>
                             <td>{{ $employee['employee_ContactNumber'] }}</td>
-                            <td>{{ $employee['store_name'] }}</td>
+                            <td>{{ $employee->store->store_name ?? 'N/A' }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     <a href="/edit-employee/{{$employee['employee_id']}}" class="text-primary"><i class="fas fa-edit mr-3"></i></a>

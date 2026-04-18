@@ -41,7 +41,6 @@ class EmployeeController extends Controller
             'employee_Email' => $validatedFields['employee_Email'],
             'employee_ContactNumber' => $validatedFields['employee_ContactNumber'],
             'store_id' => $selectedStore->store_id,
-            'store_name' => $selectedStore->store_name,
             ]);
         return redirect('/emp');
     }
@@ -132,9 +131,6 @@ class EmployeeController extends Controller
             ]);
             
 
-            $store = Store::find($incomingFields['store_id']);
-            $incomingFields['store_name'] = $store->store_name;
-            
             Employee::create($incomingFields);
             return redirect('/emp');
     }

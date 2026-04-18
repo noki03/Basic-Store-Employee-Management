@@ -13,7 +13,6 @@ class Employee extends Model
         'employee_Email',
         'employee_ContactNumber',
         'store_id',
-        'store_name',
     ];
 
     // Define the relationship with Store
