@@ -16,21 +16,40 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a class="nav-link" href="/">Store</a>
+                <li class="nav-item {{ Request::routeIs('stores.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('stores.index') }}">Store</a>
                 </li>
-                <li class="nav-item {{ Request::is('emp') ? 'active' : '' }}">
-                    <a class="nav-link" href="/emp">Employee</a>
+                <li class="nav-item {{ Request::routeIs('employees.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('employees.index') }}">Employee</a>
                 </li>
             </ul>
         </div>
     </nav>
 
+    <!-- Flash Messages -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="container">
         <div id="employeeManagement">
             <h1>Register Employee</h1>
             <!-- Add new employee form -->
-            <form action="/registerEmp" method="POST">
+            <form action="{{ route('employees.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="employeeName">Employee Name</label>
@@ -123,8 +142,8 @@
                             <td>{{ $employee->store->store_name ?? 'N/A' }}</td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <a href="/edit-employee/{{$employee['employee_id']}}" class="text-primary"><i class="fas fa-edit mr-3"></i></a>
-                                    <form action="/delete-employee/{{ $employee->employee_id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this employee?')">
+                                    <a href="{{ route('employees.edit', $employee->employee_id) }}" class="text-primary"><i class="fas fa-edit mr-3"></i></a>
+                                    <form action="{{ route('employees.destroy', $employee->employee_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this employee?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-link text-danger p-0 m-0 text-center"><i class="fas fa-trash"></i></button>
