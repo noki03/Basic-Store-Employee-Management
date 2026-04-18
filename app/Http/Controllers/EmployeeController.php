@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use App\Models\Store;
 use Illuminate\Http\Request;
-use Illuminate\Database\QueryException;
-
 
 class EmployeeController extends Controller
 {   
