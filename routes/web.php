@@ -5,6 +5,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployeeController;
+use App\Services\EmployeeService;
 
 Route::get('/', function () {
     $stores = Store::all();
@@ -13,7 +14,8 @@ Route::get('/', function () {
 
 Route::get('/emp', function () {
     $stores = Store::all();
-    $employees = Employee::with('store')->get();
+    $employeeService = app(EmployeeService::class);
+    $employees = $employeeService->getAllEmployees();
 
     return view('empManagement', [
         'stores' => $stores,
